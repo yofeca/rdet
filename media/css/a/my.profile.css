@@ -1,0 +1,60 @@
+h4{ 
+    background: url("images/ui-bg_gloss-wave_35_f6a828_500x100.png") repeat-x scroll 50% 50% #F6A828;
+    border: 1px solid #E78F08;
+    color: #FFFFFF;
+    font-weght: bold;
+    margin: 20px 0 0 10px; 
+    padding: 5px 10px; 
+    float: left; 
+}
+
+#h-user-info{ width: 455px; }
+#user-profile-info{
+    background-color: #F0F8FF; border: 1px solid #A7C942; color: #000000; 
+    width: 455px; 
+    float: left; margin: 0 10px; padding: 10px;
+}
+
+#user-profile-info label{ 
+    background: #F6A828; color: #FFFFFF; font-weight: bold;
+    display: inline-block; text-align: right;
+    width: 10em; height: 1.5em;
+    border: 1px solid #F6A828; border-top-left-radius: 8px; border-bottom-left-radius: 8px;  
+    padding-top: 3px; padding-right: 5px; margin-bottom: 5px;
+}
+
+#user-profile-info .text{height: 1.75em; width: 295px; padding-left: 5px; }
+#user-profile-info select{height: 1.8em; width: 150px; padding-left: 5px; padding-top: 3px; }
+#user-profile-info textArea{ height: 100px; width: 290px;  resize: none; padding: 5px; }
+
+/*--------------accounts------------------------*/
+#h-acc-info{ width: 290px; }
+#profile-user-acc {
+    background-color: #F0F8FF; border: 1px solid #A7C942; color: #000000; 
+    width: 290px; 
+    float: left; padding: 10px;    
+}
+
+#profile-user-acc label{ 
+    background-color: #F6A828; color: #FFFFFF; font-weight: bold;
+    display: inline-block; text-align: right;
+    width: 7em; height: 1.5em;
+    border: 1px solid #F6A828; border-top-left-radius: 8px; border-bottom-left-radius: 8px;  
+    padding-top: 3px; padding-right: 5px; margin-bottom: 5px;
+}
+
+#profile-user-acc .text{ height: 1.75em; width: 173px; padding-left: 5px; }
+
+
+/*-----------------buttons--------------------*/
+#user-profile-buttons, #edit-account{
+    float: right; font-size: 12px;
+}
+
+/*--------------dialog--------------------*/
+#edit-account-dialog label{ display: block; height: 1.5em; width: 300px; padding-top: 5px; }
+#edit-account-dialog input{ display: block;
+    height: 2em; width: 300px; padding-left: 5px;
+}
+
+.validate-error{ color: red; font-size: 10px; }

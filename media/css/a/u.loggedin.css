@@ -1,0 +1,12 @@
+
+#user-loggedin { width: 290px; height: 50px; float: right; margin-top: 10px; }
+#user-loggedin h2{ width: 245px; float: left; margin-left: 15px; margin-top: 6px; font-size: 16px; }
+#user-loggedin #user-name{ margin-top: 7px; height: 35px; width: 290px; 
+                           color: #FFF; border-top-left-radius: 10px; border-bottom-left-radius: 10px; background: #A7C942; }
+#user-loggedin button{ float: left; font-size: 12px; margin-top: 3px; }
+
+#user-loggedin a{ text-decoration: none; color: #FFF; }
+
+/* #A7C942; w3schools green
+ #ADD8E6; LightBlue 
+  #F0F8FF; alice blue*/

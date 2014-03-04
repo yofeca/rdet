@@ -1,0 +1,35 @@
+body{ font-family: arial, sans-serif; font-size: 14px;  }
+@-moz-keyframes myfirst{
+    from {color: #0000FF; text-shadow: 5px 5px 5px #FF0000; }
+}
+/*Header---------------------------------*/
+#header{ background-color: #555555; width: 100%; min-width: 600px; height: 90px; float: left; margin-top: -10px; }
+#header img{ width: 75px; heigth: 70px; margin-top: 10px; margin-left: 15px; float: left; }
+#header #logo-title{ margin-left: 10px; float: left; }
+#header #ifsu-name{ margin: 20px 0 0 0; font-weight: bold; font-size: 1.5em; font-family: broadway, sans-serif; color: #FECA40; }
+#header #rdet-name{ margin: 0; font-style: italic; font-size: 1em; color: #f6a828; }
+
+/*Footer---------------------------------*/
+#footer{ background-color: #555555; text-align: center; width: 1024px; height: 90px; width: 100%; min-width: 600px; padding-top: 20px; float: left; }
+#footer p{ margin: 0; color: #FFFFFF; }
+
+/*Content---------------------------------*/
+#content{ width: 100%; min-width: 600px; height: 600px;}
+#admin-login{ margin: 0px auto 0px auto; width: 500px; height: 600px; }
+fieldset{  width: 410px; height: 200px; background-color: #F0F8FF; border: 2px solid #A7C942; float: left; margin-left: 33px;}
+fieldset legend{ font-weight: bold; margin-left: 10px; background-color: #A7C942; width: 150px; padding: 5px 10px 5px 10px;
+                        border-top-right-radius: 15px; border-bottom-right-radius: 15px;
+}
+fieldset label, #login input{ display: block; float: left; }
+fieldset label{ width: 6em; height: 1.5em;  margin: 15px 10px 0px 20px; }
+fieldset input{ width: 20em; height: 2em; margin: 15px 0.5em 5px 0px; padding-left: 5px; }
+
+fieldset #btn-login{ width: 7em; height: 2.75em; margin-left: 295px; }
+
+#error-login{ width: 480px; float: left;  padding: 10px; margin-top: 90px; }
+#error-login p{-moz-animation: myfirst 2s; color: #FF0000; text-align: center;}
+
+
+/* #A7C942; w3schools green
+ #ADD8E6; LightBlue 
+  #F0F8FF; alice blue*/

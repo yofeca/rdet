@@ -1,0 +1,40 @@
+footer p { margin: 0 !important; }
+footer { text-align: center; color: #FFF; background: #222222; padding: 5px; }
+.navbar-form .btn-group .dropdown-menu{ left: 0;}
+.container .row-fluid .row { margin-bottom: 10px !important; }
+.file-icons { width: 18px !important; }
+.navbar ul li a:hover { background: #009900 !important;}
+@media(max-width: 768px){
+    body { margin-top: 0; }
+    h2, h3 { margin: 0; }
+    .navbar-brand { padding-left: 30px; color: #FFF; }
+    .navbar ul>li>a { padding-left: 30px; }
+    .navbar .navbar-form { padding: 5px 30px; margin-bottom: 0; }
+    .navbar .navbar-form button { margin-top: 5px; }
+    
+    .col-md-9, .col-lg-9 { padding: 0px; }
+    
+    #research-title{
+        resize: none !important; 
+        height: 75px;
+    }
+}
+
+@media(min-width: 769px){
+    body { margin-top: 0px; }
+    h2, h3 { margin-top: 0; }
+    .col-md-9, .col-lg-9 { padding: 15px; }
+
+    #research-title{
+        resize: none !important;
+    }
+}
+
+@media(min-width: 992px){
+    body { margin-top: 50px; }
+    h2, h3 { margin: 20px 0 0; }
+
+    #research-title{
+        resize: none !important; 
+    }
+}

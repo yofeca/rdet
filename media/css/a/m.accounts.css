@@ -1,0 +1,66 @@
+h4{ 
+    background: url("images/ui-bg_gloss-wave_35_f6a828_500x100.png") repeat-x scroll 50% 50% #F6A828;
+    border: 1px solid #E78F08;
+    color: #FFFFFF;
+    font-weght: bold;
+    margin: 10px 0 0 10px; 
+    padding: 5px 10px; 
+    float: left;
+}
+
+#h-user-info{ width: 415px; }
+#user-profile-info{
+    background-color: #F0F8FF; border: 1px solid #A7C942; color: #000000; 
+    width: 415px; height: 300px;
+    float: left; margin: 0 10px; padding: 10px;
+}
+
+#user-profile-info label{ 
+    background-color: #F6A828; color: #FFFFFF; font-weight: bold;
+    display: inline-block; text-align: right;
+    width: 7em; height: 1.5em;
+    border: 1px solid #F6A828; border-top-left-radius: 8px; border-bottom-left-radius: 8px;  
+    padding-top: 3px; padding-right: 5px; margin-bottom: 5px;
+}
+
+#user-profile-info .text{height: 1.75em; width: 295px; padding-left: 5px; }
+#user-profile-info select{height: 1.8em; width: 150px; padding-left: 5px; padding-top: 3px; }
+#user-profile-info textArea{ height: 100px; width: 290px;  resize: none; padding: 5px; }
+
+/*--------------accounts------------------------*/
+#h-acc-info{ width: 330px; }
+#profile-user-acc {
+    background-color: #F0F8FF; border: 1px solid #A7C942; color: #000000; 
+    width: 330px; height: 300px;
+    float: left; padding: 10px;    
+}
+
+#profile-user-acc label{ 
+    background-color: #F6A828; color: #FFFFFF; font-weight: bold;
+    display: inline-block; text-align: right;
+    width: 9em; height: 1.5em;
+    border: 1px solid #F6A828; border-top-left-radius: 8px; border-bottom-left-radius: 8px;  
+    padding-top: 3px; padding-right: 5px; margin-bottom: 5px;
+}
+
+#profile-user-acc .text{ height: 1.75em; width: 185px; padding-left: 5px; }
+
+/*--------------dialog--------------------*/
+#edit-account-dialog label{ display: block; height: 1.5em; width: 300px; padding-top: 5px; }
+#edit-account-dialog input{ display: block;
+    height: 2em; width: 300px; padding-left: 5px;
+}
+
+.validate-error{ color: red; font-size: 10px; }
+
+/*-------------edit account button-------------------*/
+#update-user-account{
+    display: block; margin-bottom: 5px; width: 320px; text-align: right; text-decoration: underline; 
+}
+
+#update-user-account:hover{ cursor: pointer; }
+
+#m-account-buttons{
+    margin-top: 70px; float: right;
+    font-size: 12px;
+}

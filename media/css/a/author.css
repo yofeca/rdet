@@ -1,0 +1,106 @@
+.label { 
+    border-top-left-radius: 10px; 
+    border-bottom-left-radius: 10px; 
+    background: #FFA500; 
+    text-align: right; 
+    padding: 4px 6px 6px 10px; 
+    color: #FFF; font-weight: bold; 
+}
+
+h4 { 
+    margin-left: 12px;
+    width: 790px;
+    padding: 5px 0 0 10px; 
+    float: left; 
+    background: url("images/ui-bg_gloss-wave_35_f6a828_500x100.png") repeat-x scroll 50% 50% #F6A828;
+    border: 1px solid #E78F08;
+    color: #FFFFFF;
+    font-weght: bold;
+    height: 1.75em;
+}
+
+/*--Author Information---------------------------------------------------------*/
+#author {
+    margin-left: 11px;
+    margin-bottom: 10px;
+    float: left;
+    width: 800px; 
+    height: 155px;  
+    background: #FFF; 
+    border: 1px solid #AAAAAA; 
+}
+
+#author div { 
+    float: left; 
+    margin-top: 10px;
+}
+
+#author label, #author input { 
+    display: block; 
+    float: left; 
+}
+
+#author-name { width: 550px; }
+#author-name label { width: 190px; margin-bottom: 5px; margin-left: 10px; }
+#author-name .text { height: 2em; width: 320px; margin: 0 0 5px 3px; padding-left: 5px; }
+
+#other-info { width: 250px; }
+#other-info label { width: 50px; margin-bottom: 5px; margin-left: 10px; }
+#other-info .text{ height: 2em; width: 150px; margin: 0 0 5px 3px; padding-left: 5px; }
+
+/*--Author Published Books-----------------------------------------------------*/
+#published-books {
+    float: left;
+    width: 800px; 
+    height: 180px; 
+    margin-left: 11px;
+    margin-bottom: 10px;
+    background: #FFF; 
+    border: 1px solid #AAAAAA; 
+    overflow: auto;
+}
+
+#published-books ol{ margin-left: 50px; margin-top: 10px; }
+#published-books ol li{ padding: 5px 0; font-weight: bold; }
+#published-books ol li p{ font-weight: normal; padding-top: 5px; padding-bottom: 5px; }
+#published-books ol li i{ font-size: 12px; }
+
+/*------jqgrid-------------------------------*/
+#jq-grid-author{ margin: 10px 0 0 10px; clear: left; }
+
+/*-------buttons-------*/
+#author-buttons{ width: 213px; font-size: 10px; float: left; padding-left: 37px; padding-top: 30px; }
+
+
+/*--Dialog---------------------------------------------------------------------*/
+.ui-dialog-title, .ui-dialog-buttonset{ font-size: 12px; }
+
+#author-dialog-form { font-size: 12px; }
+.adf-labels { font-weight: bold; }
+#author-dialog-form label{ height: 15px; width: 100%; float: left; padding-top: 10px; }
+#author-dialog-form input{ height: 25px; width: 100%; float: left; padding-left: 5px; }
+
+#adf-btn-sex, #adf-type{ float: left; height: 25px; width: 100%; border: 1px solid #AAAAAA; border-radius: 4px; }
+#adf-btn-sex input{float: left; width: 5px; margin-left: 10px;  }
+#adf-btn-sex p{float: left; width: 50px; margin-left: 5px; margin-top: 5px; height: 25px; }
+
+#adf-type{ margin-top: 10px; height: 30px; }
+#sel-type-label{float: left; width: 95px; height: 25px; margin-top: 5px; margin-left: 5px; }
+#adf-sel-type{ display: inline; float: left; width: 170px; height: 25px; margin-top: 3px; }
+
+.remove-research{ margin-left: 15px; color: #FF0000; font-weight: normal; font-style: italic; }
+.remove-research:hover { cursor: pointer; font-weight: bold; }
+
+#validateTips { border: 1px solid transparent; padding: 0.3em; font-size: 10px; color: #FF0000; }
+#success p{ font-size: 12px; }
+
+/*--Author Search Box----------------------------------------------------------*/
+
+#user-search-box{ width: 500px; margin-left: auto; margin-right: auto; margin-top: 10px; margin-bottom: 15px; }
+#user-search-box strong{ float: left; margin-top: 13px; }
+#user-search-box input, #user-search-box select{ display: inline;  padding: 2px; font-size: 14px; margin-top: 10px;}
+#user-search-box input{ width: 250px; margin-left: 5px; height: 20px; }
+#user-search-box select{ width: 150px; height: 25px; margin-left: 5px; position: absolute;   }
+
+.search-error{ border: 1px solid #FF0000; background: #FBE6F2; }
+

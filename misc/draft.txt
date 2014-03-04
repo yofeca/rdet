@@ -1,0 +1,52 @@
+file
+	upload()
+	download()
+	delete()
+	list()
+
+accounts
+	new()
+	update()
+	delete()
+	list()
+	view()
+
+admin
+	login()
+	logout()
+	my_profile()
+	home()
+	
+	*m_admin
+	-login()
+	-my_profile()
+	
+user
+    publication($view)
+        $view == 'type'
+		-international
+		-national
+		-local
+	$view == 'research_books'
+		-social
+		-upland
+	$view == 'research_type'
+		-faculty
+		-student
+		-community
+	$view == 'presentation'
+		-international
+		-national
+		-local
+	$view == 'status'
+		-completed
+		-ongoing
+about_us
+
+publication
+
+
+author
+	list()
+	view()
+	

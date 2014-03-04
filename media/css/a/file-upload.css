@@ -1,0 +1,46 @@
+h4{ background-color: #ADD8E6; border: 1px solid #ADD8E6; color: #000000; width: 730px; margin: 5px 0 0 25px; padding: 5px 10px; float: left; }
+h4 i{ color: #FF0000; font-size: 12px;}
+.top-go-back, .bottom-go-back{ margin-top: 10px; float: right; width: 80px; font-weight: bold; font-size: 14px; text-decoration: none; }
+#file-upload-box{ width: 800px; height: 690px; margin-left: auto; margin-right: auto; margin-top: 10px; }
+
+/* Form info box */
+#file-upload-form{ width: 750px; height: 70px; margin: 5px 5px 0px 25px; float: left; }
+
+#file-upload-form label, #file-upload-form input[id="title"] { float: left; height: 1.75em; }
+#file-upload-form label, #research-info strong{ width: 60px; font-weight: bold; text-align: right; border-top-left-radius: 8px; border-bottom-left-radius: 8px; 
+                         padding: 4px 5px 0 5px; background-color: #A7C942; color: #FFF;
+}
+#file-upload-form input[id="title"]{ width: 560px;  padding: 2px 3px 2px 3px; margin-left: 5px; }
+#file-upload-form input[type="submit"]{ width: 100px; height: 2.15em; margin-left: 5px; float: left;}
+#file-upload-form input[type="file"] { width: 747px; clear: left; height: 2.25em; background-color: #FFF; border: 1px solid #A7C942;
+                                       border-top-left-radius: 5px; border-bottom-left-radius: 5px; margin-top: 5px; float: left;
+}
+
+/* Files info box */
+#files {  width: 750px; height: 290px; margin-left: 25px; border: 1px solid #ADD8E6; background-color: #EAF2D3; float: left; overflow: auto; }
+
+#files strong { font-size: 14px; }
+#files a { margin: 0 0 5px 10px; }
+#files a.delete_file_link, #files a.edit_file_link { float: right; text-decoration: none; }
+#files ul { list-style: none; }
+#files li { font-size: 12px; padding: 5px 10px; }
+#files li.alt{ background-color: #F0F8FF; }
+#file-info{ padding-left: 25px; }
+#file-inof i{ font-size: 10px; }
+
+/* Research info box */
+#research-info{ width: 750px; height: 125px; margin: 5px 0 0 25px; float: left; }
+
+#research-info .col1{ width: 380px; }
+#research-info .col2{ width: 370px; }
+#research-info .col1, #research-info .col2{ margin-top: 2px; float: left; }
+#research-info strong, #research-info .col1 strong, #research-info .col2 strong{ width: 150px; height: 1.5em; 
+             border: 1px solid #A7C942; float: left; 
+}
+#research-info p, #research-info .col1 p, #research-info .col2 p{ width: 200px; height: 1.75em; float: left; 
+        background-color: #F0F8FF; border: 1px solid #A7C942; padding: 5px 0 0px 5px; 
+}
+#research-info p{ width: 580px; }
+/* #A7C942; w3schools green
+ #ADD8E6; LightBlue 
+  #F0F8FF; alice blue*/
