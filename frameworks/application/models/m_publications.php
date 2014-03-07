@@ -454,7 +454,7 @@ class M_publications extends CI_Model {
             $sql .= ",date_completed='" . date("Y-m-d", strtotime($dcomp)) . "'";
             $sql .= ",year_published=" . $ypub;
         }
-echo $sql;
+
         $this->db->query($sql);
 
         $err = 0;
