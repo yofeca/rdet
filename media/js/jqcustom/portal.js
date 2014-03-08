@@ -28,7 +28,7 @@ $(document).ready(function() {
         sortorder: "desc", 
         caption:"RDET List of Researches:",
         gridComplete: function() {
-            firstrow = $('#jq-researches tr:nth-child(2)').attr('id')
+            firstrow = $('#jq-researches tr:nth-child(2)').attr('id');
         },
         onSelectRow : function(rid){
             window.location.href = base_url + 'research/preview/' + rid;

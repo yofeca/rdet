@@ -1,5 +1,5 @@
 <div id="research-info">
-    <h4>Research Information</h4>
+    <h4>Research Information<button id="print-research" style="font-size: 10px; margin: 0; float: right;">Print</button></h4>
     <input type="hidden" name="rid" id="rid" value="<?php echo $rid; ?>" />
     <input type="hidden" name="pubid" />
     

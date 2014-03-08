@@ -52,6 +52,9 @@ class Research extends MY_Controller{
         if($type == 2) $this->m_author->fetch_name_for_autocomplete($item);
     }
     
+    public function print_research_preview(){
+        $this->load->view('publication/print_research_preview');
+    }
     
     public function async_jq_researches(){
         $this->m_publications->fetch_researches_jq_grid_data();

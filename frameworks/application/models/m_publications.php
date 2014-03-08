@@ -291,8 +291,8 @@ class M_publications extends CI_Model {
 
                 $response->rows[$i]['cell'] = array(
                     $start + 1,
-                    $row->title,
-                    $row->funding_agency,
+                    wordwrap($row->title, 60, '<br>', true) ,
+                    wordwrap($row->funding_agency, 35,'<br>',true),
                     $pt, $rb, $rt, $p, $s, date("m/d/Y", strtotime($dp)), $yp,
                     $row->downloads,
                     $row->views
@@ -410,8 +410,8 @@ class M_publications extends CI_Model {
 
                 $response->rows[$i]['cell'] = array(
                     $start + 1,
-                    $row->title,
-                    $row->funding_agency,
+                    wordwrap($row->title, 55, '<br>', true) ,
+                    wordwrap($row->funding_agency, 35,'<br>',true),
                     $pt, $rb, $rt, $p, $s, date("m/d/Y", strtotime($dp)), $yp,
                     $row->downloads,
                     $row->views
@@ -773,8 +773,8 @@ class M_publications extends CI_Model {
 
                 $response->rows[$i]['cell'] = array(
                     $start + 1,
-                    $row->title,
-                    $row->funding_agency,
+                    wordwrap($row->title, 55, '<br>', true) ,
+                    wordwrap($row->funding_agency, 35,'<br>',true),
                     $pt, $rb, $rt, $p, $s, $dp, $yp,
                 );
                 $i++;
@@ -784,6 +784,75 @@ class M_publications extends CI_Model {
         }
     }
 
+    public function fetch_print_preview_table_data() { //------------------------
+        if(isset($_GET['page']))
+            $page = (int) $_GET['page'];
+        else
+            $page = 1;
+
+        if (!$page)
+            $page = 1;
+
+        $sql = "SELECT * FROM research";
+
+        $result = $this->db->query($sql);
+
+        if ($result) {
+
+            $response = new stdClass;
+
+            $i = 0;
+
+            $total = $result->num_rows();
+
+            $rpp = 10;
+
+            $number_of_pages = ceil($total / $rpp);
+
+            $response->total = $number_of_pages;
+
+            $start = ($page - 1) * $rpp;
+
+            $sql .= " ORDER BY date_completed DESC LIMIT " . $start . "," . $rpp;
+
+            $result = $this->db->query($sql);
+
+            foreach ($result->result() as $row) {
+                
+                $auid_arr = $this->fetch_authors($row->id);
+//                $sql = "SELECT authors_id FROM publish WHERE research_id=" . $row->id;
+//                
+//                $auid = $this->db->query($sql)->result();  
+//                
+//                $auid_arr = array();
+//                
+//                for($x = 0, $t = count($auid); $x < $t; $x++){
+//                    $auid_arr[] = $auid[$x]->authors_id;
+//                }
+
+                if ($row->date_completed == '0000-00-00' || $row->date_completed == '' || $row->date_completed == NULL)
+                    $dp = '--';
+                else{
+                    $d = getdate(strtotime($row->date_completed));
+                    $dp = $d['month'] . ' ' . $d['mday'] . ', ' . $d['year'];
+                }
+                
+                $response->rows[$i]['id'] = $row->id;
+
+                $response->rows[$i]['cell'] = array(
+                    $start + 1,
+                    
+                    wordwrap($row->title, 50, '<br>', true) ,
+                    $auid_arr,
+                    wordwrap($row->funding_agency, 35,'<br>',true),
+                    $dp
+                );
+                $i++;
+                $start++;
+            }
+            return $response;
+        }
+    }
 //******************************************************************************
 }
 

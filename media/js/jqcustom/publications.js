@@ -12,6 +12,12 @@ jQuery(document).ready(function(){
     lock_research_fields(true);
     res_id = jQuery("#rid").val();
     
+    jQuery("#print-research").click(function(){
+        window.location.href = base_url + "research/print_research_preview"
+    });
+    
+    jQuery("#print-research").button({icons:{primary: "ui-icon-print"},text:true});
+    
     jQuery("input[name='nr-sc-dcompleted']").datepicker({
         changeMonth: true,
         changeYear: true,
@@ -228,13 +234,13 @@ jQuery(document).ready(function(){
             { name : 'yearPub', index : '', width : 100, fixed : true, align : 'center', sortable : true, resizable : false, search : false }
         ], 
         width: 800,
-        height: 170,
+        height: 150,
         rowNum: 8, 
 //        rowList:[10,20,30], 
         pager: '#jq-researches-pages', 
         sortname: 'date_completed', 
-        viewrecords: true, 
-        sortorder: "asc", 
+        //viewrecords: true, 
+        sortorder: "desc", 
         caption:"RDET List of Researches:",
         gridComplete: function() {
             firstrow = $('#jq-researches tr:nth-child(2)').attr('id')

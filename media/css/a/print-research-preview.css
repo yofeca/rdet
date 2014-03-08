@@ -1,0 +1,107 @@
+body{ font-family: sans-serif; }
+
+#ifsu-logo, #ifsu-name{
+    float: left;
+}
+
+#ifsu-name{
+    margin: 9px;
+}
+
+#ifsu-name .ifsu{
+    font-size: 20px; font-weight: bold;
+}
+
+#ifsu-name .ifsu-add{
+    font-size: 16px;
+}
+#ifsu-name .ifsu-rdet{
+    font-size: 18px;
+}
+
+#list-of-researches{
+    float: left;
+}
+
+#list-of-researches table{
+    border-collapse: collapse;
+    font-size: 12px;
+}
+
+#list-of-researches table td{
+    padding: 10px;
+}
+
+#list-of-researches table th{
+    background: #212121;
+    color: #FFF;
+    padding: 5px;
+}
+
+.pagination{
+        text-align: center;
+}
+.pagination li{
+    list-style: none;
+    display: inline;
+    font-size: 12px;
+}
+
+.pagination li a {
+    text-decoration: none;
+    padding: 3px 5px;
+    margin: 2px;
+    border: 1px solid #000;
+    border-radius: 3px;
+}
+
+.pagination li a:link,.pagination li a:visited{
+    color: #000;
+}
+
+.pagination li a:hover{
+    font-weight: bold;
+    color: #003399;
+}
+
+.pagination li a:active{
+    font-weight: bold;
+    color: #009900;
+}
+
+hr {
+    width: 860px;
+    float: left;
+}
+h4{
+    text-align: center;
+}
+caption{
+    padding: 5px;
+    font-size: 16px;
+    background: #000;
+    color: #FFF;
+}
+table td:nth-child(1){
+    width: 10px;
+}
+table td:nth-child(2){
+    width: 325px;
+}
+table td:nth-child(3){
+    width: 150px;
+}
+table td:nth-child(4){
+    width: 150px;
+}
+table td:nth-child(5){
+    width: 100px;
+}
+caption button{
+    float: right;
+}
+
+#home-link{
+    text-decoration: none;
+    float: right; margin-right: 5px; font-size: 16px;
+}
