@@ -1,6 +1,6 @@
 <div class="container-fluid">
 <div class="row-fluid">
-    <div class="hidden-xs col-sm-3 col-md-3 col-lg-3">
+    <div class="hidden-xs col-sm-2 col-md-2 col-lg-2">
         <h2>MENU</h2>
         <div class="list-group">
             <a class="list-group-item active" href="<?php echo base_url('user/home'); ?>">Home</a>
@@ -10,7 +10,7 @@
         </div>
     </div>
 
-    <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9" ><!--Contents-->
+    <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10" ><!--Contents-->
         <!-- Nav tabs -->
         <ul class="nav nav-tabs">
             <li class="active"><a href="#international" data-toggle="tab">International Publications</a></li>
@@ -35,7 +35,7 @@
                     <?php foreach ($results as $data) { ?>
 
                         <tr>
-                            <td>
+                            <td style="width: 450px;">
                                 <a href="<?php echo base_url('user/preview_research/0/'. $data->id); ?>">
                                     <?php echo $data->title; ?>
                                 </a>

@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="row-fluid">
-        <div class="hidden-xs col-sm-3 col-md-3 col-lg-3">
+        <div class="hidden-xs col-sm-2 col-md-2 col-lg-2">
             <h2>MENU</h2>
             <div class="list-group">
                 <a class="list-group-item" href="<?php echo base_url('user/home'); ?>">Home</a>
@@ -10,7 +10,7 @@
             </div>
         </div>
 
-        <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+        <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
             <?php $items = $this->m_author->fetch_author_table_data();?>
             
             <h3>List of Authors:</h3>
@@ -33,8 +33,9 @@
                 <?php } ?>
                     <tr><td colspan="9" style="text-align: center;">
                             <ul class="pagination">
+                                <li><span>Pages:</span></li>
                         <?php for($k = 1; $k < $items->total+1; $k++){?>
-                                <li><a href="<?php echo base_url('user/authors/?page='.$k); ?>"><?php echo "Page ". $k; ?></a></li>
+                                <li><a href="<?php echo base_url('user/authors/?page='.$k); ?>"><?php echo $k; ?></a></li>
                         <?php } ?>
                             </ul>
                     </td></tr>

@@ -1,9 +1,10 @@
 <html>
     <head>
-        <title>Print - Research Preview</title>
-        <style>
+        <title>Research Preview</title>
+<!--        <style>
             <?php echo '@import url("' . base_url('media/css/a/print-research-preview.css') . '");'; ?>
-        </style>
+        </style>-->
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('media/css/a/print-research-preview.css'); ?>" media="screen,print"/>
     </head>
     <body>
         <div id="header">
@@ -20,7 +21,7 @@
             <?php $items = $this->m_publications->fetch_print_preview_table_data(); ?>
             
             <table border="1">
-                <caption>LIST OF RESEARCHES <button id="print" onClick="window.print()">Print</button><a id="home-link" href="<?php echo base_url('research/preview');?>">Back</a></caption>
+                <caption>LIST OF RESEARCHES <button class="no-print" id="print" onClick="window.print()">Print</button><a class="no-print" id="home-link" href="<?php echo base_url('research/preview');?>">Back</a></caption>
                 <tr>
                     <th>No.</th>
                     <th>Research Title</th>
@@ -57,7 +58,7 @@
                         <?php } ?>
                     </tr>
                 <?php } ?>
-                    <tr><td colspan="9">
+                    <tr class="no-print"><td colspan="9">
                             <ul class="pagination">
                         <?php for($k = 1; $k < $items->total+1; $k++){?>
                                 <li><a href="<?php echo base_url('research/print_research_preview/?page='.$k); ?>"><?php echo "Page ". $k; ?></a></li>

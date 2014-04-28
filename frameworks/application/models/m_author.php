@@ -285,12 +285,30 @@ class M_author extends CI_Model {
         return $result;
     }
 
-    public function fetch_author_search($author_id){
+    public function fetch_author_search($option, $item){
+        
+        if($option == 1) $opt = 'last_name';
+        else if($option == 2) $opt = 'first_name';
+        else if($option == 3) $opt = 'middle_name';
         
         $sql = "SELECT authors.id, first_name, middle_name, last_name, sex, type
                 FROM person
                 INNER JOIN authors ON person.id = authors.person_id
-                WHERE last_name LIKE '%".mysql_real_escape_string(urldecode($author_id))."%'";
+                WHERE ".$opt." LIKE '%".mysql_real_escape_string(urldecode($item))."%'";
+        
+        $result = $this->db->query($sql)->row();
+        
+        return $result;
+        //echo $sql;
+    }
+    
+    public function fetch_author_advsearch($n,$skey){
+        
+        $sql = "SELECT authors.id, first_name, middle_name, last_name, sex, type
+                FROM person
+                INNER JOIN authors ON person.id = authors.person_id";
+        $sql .= " WHERE " . $n . " LIKE '%".mysql_real_escape_string(urldecode($skey))."%'";
+
         
         $result = $this->db->query($sql)->row();
         

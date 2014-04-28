@@ -22,12 +22,12 @@
         <strong>Research title:</strong><p><?php echo $research->title; ?></p>
         <strong>Funding agency:</strong><p><?php echo $research->funding_agency; ?></p>
         <div class="col1">
-            <strong>Publication type:</strong><p><?php echo $pt; ?></p>
+            <strong>Level of Publication:</strong><p><?php echo $pt; ?></p>
             <strong>Research books:</strong><p><?php echo $rb ?></p>
         </div>
         <div class="col2">
             <strong>Research Type:</strong><p><?php echo $rt; ?></p>
-            <strong>Presentation:</strong><p><?php echo $p; ?></p>
+            <strong>Level of Presentation:</strong><p><?php echo $p; ?></p>
         </div>
     </div>
     <div id="file-upload-form">

@@ -26,15 +26,30 @@ jQuery(document).ready(function(){
         showOn: "both",
         buttonImage: base_url+"media/image/calendar-icon.png"
     });
+    
+    jQuery("input[name='nr-date-presented']").datepicker({
+        changeMonth: true,
+        changeYear: true,
+        dateFormat: "mm/dd/yy",
+        constrainInput: true,
+        showOn: "both",
+        buttonImage: base_url+"media/image/calendar-icon.png"
+    });
        
     jQuery("select[name='nr-status']").change( function(){
         sel = jQuery("select[name='nr-status']").val();
         if (sel==1){
             st = 'completed'
-            jQuery("#nr-status-completed").css("visibility","visible");
         }else if(sel==2){
-            st = 'ongoing'
-            jQuery("#nr-status-completed").css("visibility","hidden");
+            st = 'published'
+            jQuery("input[name='nr-sc-dcompleted']").val('');
+            jQuery("input[name='nr-sc-ypublished']").val('');
+        }else if(sel==3){
+            st = 'conducted'
+            jQuery("input[name='nr-sc-dcompleted']").val('');
+            jQuery("input[name='nr-sc-ypublished']").val('');
+        }else if(sel==4){
+            st = 'presented'
             jQuery("input[name='nr-sc-dcompleted']").val('');
             jQuery("input[name='nr-sc-ypublished']").val('');
         }else
@@ -42,6 +57,7 @@ jQuery(document).ready(function(){
     });
     
     jQuery('#logout').button({icons: {primary: "ui-icon-power"}, text: false}).click(function(){ window.location.href = base_url + 'admin/logout'});
+    
     jQuery('#new').button({icons: {primary: "ui-icon-document"}, text: true})
             .click(function(){
                 jQuery('#nw-ed-research').dialog({
@@ -61,8 +77,12 @@ jQuery(document).ready(function(){
                                         title: jQuery("input[name='nr-title']").val(),
                                         agency: jQuery("input[name='nr-agency']").val(),
                                         ptype: jQuery("select[name='nr-ptype']").val(),
-                                        rbooks: jQuery("select[name='nr-rbooks']").val(),
-                                        rtype: jQuery("select[name='nr-rtype']").val(),
+                                        rbooks: jQuery("input[name='nr-rbooks']").val(),
+                                        rtype: jQuery("input[name='nr-rtype']").val(),
+                                        res: jQuery("select[name='nr-researchers']").val(),
+                                        venue: jQuery("input[name='nr-venue']").val(),
+                                        fora: jQuery("input[name='nr-fora']").val(),
+                                        dpres: jQuery("input[name='nr-date-presented']").val(),
                                         pres: jQuery("select[name='nr-pres']").val(),
                                         status: jQuery("select[name='nr-status']").val(),
                                         dcomp: jQuery("input[name='nr-sc-dcompleted']").val(),
@@ -73,6 +93,7 @@ jQuery(document).ready(function(){
                                             alert(response.msg);
                                         else{
                                             jQuery('#nw-ed-research').dialog("close");
+                                            jQuery("#jq-researches").trigger("reloadGrid");
                                             fill_research_fields(response.rid);
                                             populate_research_authors(response.rid);
                                             populate_research_files(response.rid);
@@ -89,7 +110,7 @@ jQuery(document).ready(function(){
                         jQuery(this).dialog("close");
                     },open: function(){
                         clear_nw_ed_research_fields();
-                        jQuery("#nr-status-completed").css("visibility","hidden");
+                        //jQuery("#nr-status-completed").css("visibility","hidden");
                     }
                 });
             });
@@ -114,8 +135,12 @@ jQuery(document).ready(function(){
                                         title: jQuery("input[name='nr-title']").val(),
                                         agency: jQuery("input[name='nr-agency']").val(),
                                         ptype: jQuery("select[name='nr-ptype']").val(),
-                                        rbooks: jQuery("select[name='nr-rbooks']").val(),
-                                        rtype: jQuery("select[name='nr-rtype']").val(),
+                                        rbooks: jQuery("input[name='nr-rbooks']").val(),
+                                        rtype: jQuery("input[name='nr-rtype']").val(),
+                                        res: jQuery("select[name='nr-researchers']").val(),
+                                        venue: jQuery("input[name='nr-venue']").val(),
+                                        fora: jQuery("input[name='nr-fora']").val(),
+                                        dpres: jQuery("input[name='nr-date-presented']").val(),
                                         pres: jQuery("select[name='nr-pres']").val(),
                                         status: jQuery("select[name='nr-status']").val(),
                                         dcomp: jQuery("input[name='nr-sc-dcompleted']").val(),
@@ -126,6 +151,7 @@ jQuery(document).ready(function(){
                                             alert(response.msg);
                                         else{
                                             jQuery('#nw-ed-research').dialog("close");
+                                            jQuery("#jq-researches").trigger("reloadGrid");
                                             fill_research_fields(response.rid);
                                             populate_research_authors(response.rid);
                                             populate_research_files(response.rid);
@@ -220,15 +246,16 @@ jQuery(document).ready(function(){
     jQuery("#jq-researches").jqGrid({ 
         url: base_url + 'research/async_jq_researches',
         datatype: "json", 
-        colNames:['#','Title', 'Funding Agency', 'Publication Type','Research Books','Research Type','Presentation','Status','Date Completed','Published'], 
+        colNames:['#','Title', 'Funding Agency', 'Researchers','Publication Type','Research Books','Research Type','Presentation','Status','Date Completed','Published'], 
         colModel:[ 
             { name : 'id', index : '', width : 25, fixed : true, align : 'right', sortable : false, resizable : false, search : false },
             { name : 'title', index : '', width : 350, fixed : true, align : 'left', sortable : true, resizable : false, search : true },
             { name : 'funding_agency', index : '', width : 250, fixed : true, align : 'left', sortable : true, resizable : false, search : true },
+            { name : 'Pres', index : '', width : 150, fixed : true, align : 'center', sortable : true, resizable : false, search : false },
             { name : 'pubType', index : '', width : 150, fixed : true, align : 'center', sortable : true, resizable : false, search : false },
             { name : 'resBooks', index : '', width : 150, fixed : true, align : 'center', sortable : true, resizable : false, search : false },
             { name : 'resType', index : '', width : 150, fixed : true, align : 'center', sortable : true, resizable : false, search : false },
-            { name : 'Pres', index : '', width : 150, fixed : true, align : 'center', sortable : true, resizable : false, search : false },
+            { name : 'Res', index : '', width : 150, fixed : true, align : 'center', sortable : true, resizable : false, search : false },
             { name : 'stat', index : '', width : 100, fixed : true, align : 'center', sortable : true, resizable : false, search : false },
             { name : 'dateComp', index : '', width : 100, fixed : true, align : 'center', sortable : true, resizable : false, search : false },
             { name : 'yearPub', index : '', width : 100, fixed : true, align : 'center', sortable : true, resizable : false, search : false }
@@ -238,7 +265,7 @@ jQuery(document).ready(function(){
         rowNum: 8, 
 //        rowList:[10,20,30], 
         pager: '#jq-researches-pages', 
-        sortname: 'date_completed', 
+        sortname: 'date_added', 
         //viewrecords: true, 
         sortorder: "desc", 
         caption:"RDET List of Researches:",
@@ -311,9 +338,13 @@ function fill_research_fields(id) {
             jQuery("input[name='rid']").val(response.rid);
             jQuery("input[name='title']").val(response.title);
             jQuery("input[name='agency']").val(response.agency);
+            jQuery("input[name='researchers']").val(response.res);
             jQuery("input[name='ptype']").val(response.pt);
             jQuery("input[name='rbooks']").val(response.rb);
             jQuery("input[name='rtype']").val(response.rt);
+            jQuery("input[name='venue']").val(response.venue);
+            jQuery("input[name='fora']").val(response.fora);
+            jQuery("input[name='date-presented']").val(response.dpres);
             jQuery("input[name='pres']").val(response.p);
             jQuery("input[name='stat']").val(response.s);
             jQuery("input[name='dcompleted']").val(response.dc);
@@ -494,6 +525,12 @@ function populate_research_files(rid){
 function clear_nw_ed_research_fields(){
     jQuery("input[name='nr-title']").val('');
     jQuery("input[name='nr-agency']").val('');
+    jQuery("input[name='researchers']").val('');
+    jQuery("input[name='nr-rbooks']").val('');
+    jQuery("input[name='nr-rtype']").val('');
+    jQuery("input[name='nr-venue']").val('');
+    jQuery("input[name='nr-fora']").val('');
+    jQuery("input[name='nr-date-presented']").val('');
     jQuery("select option[value='0']").attr("selected",true);
     jQuery("input[name='nr-sc-dcompleted']").val('');
     jQuery("input[name='nr-sc-ypublished']").val('');
@@ -502,18 +539,27 @@ function clear_nw_ed_research_fields(){
 function fill_nw_ed_research_fields(){       
     var title = jQuery("input[name='title']").val(),
         agency = jQuery("input[name='agency']").val(),
+        res = jQuery("input[name='researchers']").val(),
+        venue = jQuery("input[name='venue']").val(),
+        fora = jQuery("input[name='fora']").val(),
+        dpres = jQuery("input[name='date-presented']").val(),
         ptype = jQuery("input[name='ptype']").val(),
         rbooks = jQuery("input[name='rbooks']").val(),
         rtype = jQuery("input[name='rtype']").val(),
         pres = jQuery("input[name='pres']").val(),
         stat = jQuery("input[name='stat']").val(),
         dcomp = jQuery("input[name='dcompleted']").val(),
-        ypub = jQuery("input[name='ypublished']").val(),
-        dloads = jQuery("input[name='dloads']").val(),
-        views = jQuery("input[name='views']").val();
+        ypub = jQuery("input[name='ypublished']").val();
+//        dloads = jQuery("input[name='dloads']").val(),
+//        views = jQuery("input[name='views']").val();
     
     jQuery("input[name='nr-title']").val(title);
     jQuery("input[name='nr-agency']").val(agency);
+    jQuery("input[name='nr-venue']").val(venue);
+    jQuery("input[name='nr-fora']").val(fora);
+    jQuery("input[name='nr-date-presented']").val(dpres);
+    jQuery("input[name='nr-sc-dcompleted']").val(dcomp);
+    jQuery("input[name='nr-sc-ypublished']").val(ypub);
     
     if (ptype.toUpperCase() == 'INTERNATIONAL')
         jQuery("select[name='nr-ptype'] option[value='1']").attr("selected",true);
@@ -523,22 +569,18 @@ function fill_nw_ed_research_fields(){
         jQuery("select[name='nr-ptype'] option[value='3']").attr("selected",true);
     else
         jQuery("select[name='nr-ptype'] option[value='0']").attr("selected",true);
+        
+    jQuery("input[name='nr-rbooks']").val(rbooks);
+    jQuery("input[name='nr-rtype']").val(rtype);
     
-    if (rbooks.toUpperCase() == 'SOCIAL RESEARCHES')
-        jQuery("select[name='nr-rbooks'] option[value='1']").attr("selected",true);
-    else if(rbooks.toUpperCase() == 'UPLAND FARM JOURNAL')
-        jQuery("select[name='nr-rbooks'] option[value='2']").attr("selected",true);
+    if (res.toUpperCase() == 'FACULTY')
+        jQuery("select[name='nr-researchers'] option[value='Faculty']").attr("selected",true);
+    else if(res.toUpperCase() == 'STUDENT')
+        jQuery("select[name='nr-researchers'] option[value='Student']").attr("selected",true);
+    else if(res.toUpperCase() == 'COMMUNITY')
+        jQuery("select[name='nr-researchers'] option[value='Community']").attr("selected",true);
     else
-        jQuery("select[name='nr-rbooks'] option[value='0']").attr("selected",true);
-
-    if (rtype.toUpperCase() == 'FACULTY')
-        jQuery("select[name='nr-rtype'] option[value='1']").attr("selected",true);
-    else if(rtype.toUpperCase() == 'STUDENTS W/ FACULTY')
-        jQuery("select[name='nr-rtype'] option[value='2']").attr("selected",true);
-    else if(rtype.toUpperCase() == 'COMMUNITY')
-        jQuery("select[name='nr-rtype'] option[value='3']").attr("selected",true);
-    else
-        jQuery("select[name='nr-rtype'] option[value='0']").attr("selected",true);
+        jQuery("select[name='nr-researchers'] option[value='0']").attr("selected",true);
     
     if (pres.toUpperCase() == 'INTERNATIONAL FORA')
         jQuery("select[name='nr-pres'] option[value='1']").attr("selected",true);
@@ -549,20 +591,16 @@ function fill_nw_ed_research_fields(){
     else
         jQuery("select[name='nr-pres'] option[value='0']").attr("selected",true);
     
-    if (stat.toUpperCase() == 'COMPLETED'){
+    if (stat.toUpperCase() == 'COMPLETED')
         jQuery("select[name='nr-status'] option[value='1']").attr("selected",true);
-        jQuery("#nr-status-completed").css("visibility","visible");
-        jQuery("input[name='nr-sc-dcompleted']").val(dcomp);
-        jQuery("input[name='nr-sc-ypublished']").val(ypub);
-    }else if(stat.toUpperCase() == 'ONGOING'){
+    else if(stat.toUpperCase() == 'PUBLISHED')
         jQuery("select[name='nr-status'] option[value='2']").attr("selected",true);
-        jQuery("#nr-status-completed").css("visibility","hidden");
-        jQuery("input[name='nr-sc-dcompleted']").val('');
-        jQuery("input[name='nr-sc-ypublished']").val('');
-    }else
-        jQuery("select[name='nr-status'] option[value='0']").attr("selected",true);
-    
-    
+    else if(stat.toUpperCase() == 'CONDUCTED')
+        jQuery("select[name='nr-status'] option[value='3']").attr("selected",true);
+    else if(stat.toUpperCase() == 'PRESENTED')
+        jQuery("select[name='nr-status'] option[value='4']").attr("selected",true);
+    else
+        jQuery("select[name='nr-pres'] option[value='0']").attr("selected",true);
 }
 
 function check_nw_ed_research_empty_fields(){
@@ -578,13 +616,13 @@ function check_nw_ed_research_empty_fields(){
         alert('Please select publication type.');
         jQuery("select option[name='nr-ptype']").focus();
         
-    } else if (jQuery("select[name='nr-rbooks']").val() == '0'){
-        alert('Please select research books.');
-        jQuery("select option[name='nr-rbooks']").focus();
+    } else if (jQuery("select[name='nr-researchers']").val() == '0'){
+        alert('Please select Researchers.');
+        jQuery("select option[name='nr-researchers']").focus();
         
-    } else if (jQuery("select[name='nr-rtype']").val() == '0'){
-        alert('Please select research type.');
-        jQuery("select option[name='nr-rtype']").focus();
+//    } else if (jQuery("select[name='nr-rtype']").val() == '0'){
+//        alert('Please select research type.');
+//        jQuery("select option[name='nr-rtype']").focus();
         
     } else if (jQuery("select[name='nr-pres']").val() == '0'){
         alert('Please select presentation.');

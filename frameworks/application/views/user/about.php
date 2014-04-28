@@ -1,6 +1,6 @@
 <div class="containter-fluid">
     <div class="row-fluid">
-        <div class="hidden-xs col-sm-3 col-md-3 col-lg-3">
+        <div class="hidden-xs col-sm-2 col-md-2 col-lg-2">
             <h2>MENU</h2>
             <div class="list-group">
                 <a class="list-group-item" href="<?php echo base_url('user/home'); ?>">Home</a>
@@ -10,7 +10,7 @@
             </div>
         </div>
 
-        <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+        <div class="col-xs-12 col-sm-10 col-md-10 col-lg-10">
             <div class="row-fluid">
                 <div class="col-md-12">
                     <h2>VGMO</h2><br/>

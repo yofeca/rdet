@@ -123,21 +123,9 @@ class M_publications extends CI_Model {
         else
             $response['pt'] = 'Not defined';
 
-        if ($row->research_books == 1)
-            $response['rb'] = 'Social Researches';
-        else if ($row->research_books == 2)
-            $response['rb'] = 'Upland Farm Journal';
-        else
-            $response['rb'] = 'Not defined';
+        $response['rb'] = $row->research_books;
 
-        if ($row->research_type == 1)
-            $response['rt'] = 'Faculty';
-        else if ($row->research_type == 2)
-            $response['rt'] = 'Student(s) w/ Faculty';
-        else if ($row->research_type == 3)
-            $response['rt'] = 'Community';
-        else
-            $response['rt'] = 'Not defined';
+        $response['rt'] = $row->research_type;
 
         if ($row->presentation == 1)
             $response['p'] = 'International Fora';
@@ -151,7 +139,11 @@ class M_publications extends CI_Model {
         if ($row->status == 1)
             $response['s'] = 'Completed';
         else if ($row->status == 2)
-            $response['s'] = 'Ongoing';
+            $response['s'] = 'Published';
+        else if ($row->status == 3)
+            $response['s'] = 'Conducted';
+        else if ($row->status == 4)
+            $response['s'] = 'Presented';
         else
             $response['s'] = 'Not defined';
 
@@ -164,6 +156,16 @@ class M_publications extends CI_Model {
             $response['yp'] = '--';
         else
             $response['yp'] = $row->year_published;
+
+        $response['res'] = $row->researchers;
+
+        $response['venue'] = $row->venue;
+        $response['fora'] = $row->fora;
+
+        if ($row->date_of_presentation == '0000-00-00' || $row->date_of_presentation == '')
+            $response['dpres'] = '--';
+        else
+            $response['dpres'] = date("m/d/Y", strtotime($row->date_of_presentation));
 
         $response['title'] = $row->title;
         $response['agency'] = $row->funding_agency;
@@ -185,19 +187,23 @@ class M_publications extends CI_Model {
     }
 
 //--End-of-[remove_author_published_book()]-------------------------------
-    public function fetch_researches_jq_home_grid_data(){
+    public function fetch_researches_jq_home_grid_data() {
         $sidx = $_REQUEST['sidx']; // get index row - i.e. user click to sort 
         $sord = $_REQUEST['sord']; // get the direction
-            
+
         $sql_search = "";
-        
-        if($_REQUEST['title']) $sql_search = ' title LIKE "%'. $_REQUEST['title'] .'%" ';
-        
-        if($_REQUEST['funding_agency'] && $_REQUEST['title']) $sql_search .= ' OR funding_agency LIKE "%'. $_REQUEST['funding_agency'] .'%" ';
-        else if($_REQUEST['funding_agency']) $sql_search .= ' funding_agency LIKE "%'. $_REQUEST['funding_agency'] .'%" ';
-        
-        if($sql_search) $sql_search = " WHERE " . $sql_search;
-        
+
+        if ($_REQUEST['title'])
+            $sql_search = ' title LIKE "%' . $_REQUEST['title'] . '%" ';
+
+        if ($_REQUEST['funding_agency'] && $_REQUEST['title'])
+            $sql_search .= ' OR funding_agency LIKE "%' . $_REQUEST['funding_agency'] . '%" ';
+        else if ($_REQUEST['funding_agency'])
+            $sql_search .= ' funding_agency LIKE "%' . $_REQUEST['funding_agency'] . '%" ';
+
+        if ($sql_search)
+            $sql_search = " WHERE " . $sql_search;
+
         $page = (int) $_GET['page'];
 
         if (!$page)
@@ -245,21 +251,9 @@ class M_publications extends CI_Model {
                 else
                     $pt = 'Not defined';
 
-                if ($row->research_books == 1)
-                    $rb = 'Social Researches';
-                else if ($row->research_books == 2)
-                    $rb = 'Upland Farm Journal';
-                else
-                    $rb = 'Not defined';
+                $rb = $row->research_books;
 
-                if ($row->research_type == 1)
-                    $rt = 'Faculty';
-                else if ($row->research_type == 2)
-                    $rt = 'Student(s) w/ Faculty';
-                else if ($row->research_type == 3)
-                    $rt = 'Community';
-                else
-                    $rt = 'Not defined';
+                $rt = $row->research_type;
 
                 if ($row->presentation == 1)
                     $p = 'International Fora';
@@ -273,7 +267,11 @@ class M_publications extends CI_Model {
                 if ($row->status == 1)
                     $s = 'Completed';
                 else if ($row->status == 2)
-                    $s = 'Ongoing';
+                    $s = 'Published';
+                else if ($row->status == 3)
+                    $s = 'Conducted';
+                else if ($row->status == 4)
+                    $s = 'Presented';
                 else
                     $s = 'Not defined';
 
@@ -291,8 +289,8 @@ class M_publications extends CI_Model {
 
                 $response->rows[$i]['cell'] = array(
                     $start + 1,
-                    wordwrap($row->title, 60, '<br>', true) ,
-                    wordwrap($row->funding_agency, 35,'<br>',true),
+                    wordwrap($row->title, 60, '<br>', true),
+                    wordwrap($row->funding_agency, 35, '<br>', true),
                     $pt, $rb, $rt, $p, $s, date("m/d/Y", strtotime($dp)), $yp,
                     $row->downloads,
                     $row->views
@@ -308,14 +306,18 @@ class M_publications extends CI_Model {
         $sidx = $_REQUEST['sidx']; // get index row - i.e. user click to sort 
         $sord = $_REQUEST['sord']; // get the direction
         $sql_search = "";
-        
-        if($_REQUEST['title']) $sql_search = ' title LIKE "%'. $_REQUEST['title'] .'%" ';
-        
-        if($_REQUEST['funding_agency'] && $_REQUEST['title']) $sql_search .= ' OR funding_agency LIKE "%'. $_REQUEST['funding_agency'] .'%" ';
-        else if($_REQUEST['funding_agency']) $sql_search .= ' funding_agency LIKE "%'. $_REQUEST['funding_agency'] .'%" ';
-        
-        if($sql_search) $sql_search = " WHERE " . $sql_search;
-        
+
+        if ($_REQUEST['title'])
+            $sql_search = ' title LIKE "%' . $_REQUEST['title'] . '%" ';
+
+        if ($_REQUEST['funding_agency'] && $_REQUEST['title'])
+            $sql_search .= ' OR funding_agency LIKE "%' . $_REQUEST['funding_agency'] . '%" ';
+        else if ($_REQUEST['funding_agency'])
+            $sql_search .= ' funding_agency LIKE "%' . $_REQUEST['funding_agency'] . '%" ';
+
+        if ($sql_search)
+            $sql_search = " WHERE " . $sql_search;
+
         $page = (int) $_GET['page'];
 
         if (!$page)
@@ -348,9 +350,9 @@ class M_publications extends CI_Model {
 
             $start = ($page - 1) * $rpp;
 
-            
+
             $sql .= $sql_search . " ORDER BY " . $sidx . " " . $sord . " LIMIT " . $start . "," . $rpp;
-            
+
             $result = $this->db->query($sql);
 
             foreach ($result->result() as $row) {
@@ -364,21 +366,9 @@ class M_publications extends CI_Model {
                 else
                     $pt = 'Not defined';
 
-                if ($row->research_books == 1)
-                    $rb = 'Social Researches';
-                else if ($row->research_books == 2)
-                    $rb = 'Upland Farm Journal';
-                else
-                    $rb = 'Not defined';
+                $rb = $row->research_books;
 
-                if ($row->research_type == 1)
-                    $rt = 'Faculty';
-                else if ($row->research_type == 2)
-                    $rt = 'Student(s) w/ Faculty';
-                else if ($row->research_type == 3)
-                    $rt = 'Community';
-                else
-                    $rt = 'Not defined';
+                $rt = $row->research_type;
 
                 if ($row->presentation == 1)
                     $p = 'International Fora';
@@ -392,7 +382,11 @@ class M_publications extends CI_Model {
                 if ($row->status == 1)
                     $s = 'Completed';
                 else if ($row->status == 2)
-                    $s = 'Ongoing';
+                    $s = 'Published';
+                else if ($row->status == 3)
+                    $s = 'Conducted';
+                else if ($row->status == 4)
+                    $s = 'Presented';
                 else
                     $s = 'Not defined';
 
@@ -410,8 +404,9 @@ class M_publications extends CI_Model {
 
                 $response->rows[$i]['cell'] = array(
                     $start + 1,
-                    wordwrap($row->title, 55, '<br>', true) ,
-                    wordwrap($row->funding_agency, 35,'<br>',true),
+                    wordwrap($row->title, 55, '<br>', true),
+                    wordwrap($row->funding_agency, 35, '<br>', true),
+                    $row->researchers,
                     $pt, $rb, $rt, $p, $s, date("m/d/Y", strtotime($dp)), $yp,
                     $row->downloads,
                     $row->views
@@ -445,8 +440,12 @@ class M_publications extends CI_Model {
         $sql = "INSERT INTO research SET title='" . mysql_real_escape_string($title) . "'"
                 . ",funding_agency='" . mysql_real_escape_string($agency) . "'"
                 . ",publication_type=" . $ptype
-                . ",research_books=" . $rbooks
-                . ",research_type=" . $rtype
+                . ",research_books='" . $rbooks . "'"
+                . ",research_type='" . $rtype . "'"
+                . ",researchers='" . $res . "'"
+                . ",fora='" . $fora . "'"
+                . ",venue='" . $venue . "'"
+                . ",date_of_presentation='" . date("Y-m-d", strtotime($dpres)) . "'"
                 . ",presentation=" . $pres
                 . ",status=" . $status;
 
@@ -472,15 +471,28 @@ class M_publications extends CI_Model {
         $sql = "UPDATE research SET title='" . mysql_real_escape_string($title) . "'"
                 . ",funding_agency='" . mysql_real_escape_string($agency) . "'"
                 . ",publication_type=" . $ptype
-                . ",research_books=" . $rbooks
-                . ",research_type=" . $rtype
+                . ",research_books='" . $rbooks . "'"
+                . ",research_type='" . $rtype . "'"
+                . ",researchers='" . $res . "'"
+                . ",fora='" . $fora . "'"
+                . ",venue='" . $venue . "'"
+                . ",date_of_presentation='" . date("Y-m-d", strtotime($dpres)) . "'"
                 . ",presentation=" . $pres
                 . ",status=" . $status;
 
-        if ($dcomp != '' && $ypub != '') {
-            $sql .= ",date_completed='" . date("Y-m-d", strtotime($dcomp)) . "'";
+
+        if ($ypub != '') {
             $sql .= ",year_published=" . $ypub;
         }
+
+        if ($dcomp != '') {
+            $sql .= ",date_completed='" . date("Y-m-d", strtotime($dcomp)) . "'";
+        }
+
+//        if ($dcomp != '' && $ypub != '') {
+//            $sql .= ",date_completed='" . date("Y-m-d", strtotime($dcomp)) . "'";
+//            $sql .= ",year_published=" . $ypub;
+//        }
 
         $sql .= " WHERE id=" . $rid;
 
@@ -538,9 +550,13 @@ class M_publications extends CI_Model {
 
         foreach ($result as $row) {
             if ($row->status == 1)
-                $st = 'Completed';
+                $s = 'Completed';
             else if ($row->status == 2)
-                $st = 'Ongoing';
+                $st = 'Published';
+            else if ($row->status == 3)
+                $st = 'Conducted';
+            else if ($row->status == 4)
+                $st = 'Presented';
             else
                 $st = '';
 
@@ -580,14 +596,14 @@ class M_publications extends CI_Model {
         $authors = array();
         $ctr = 0;
         $sql = "SELECT authors_id FROM publish WHERE research_id =" . $research_id;
-        
+
         $query = $this->db->query($sql);
         if ($query) {
             foreach ($query->result() as $row) {
                 $sql = "SELECT authors.id, first_name, middle_name, last_name, sex, type ";
                 $sql .= "FROM person INNER JOIN authors ON person.id = authors.person_id ";
                 $sql .= "WHERE authors.id =" . $row->authors_id;
-                
+
                 $query = $this->db->query($sql);
                 $authors[] = array($query->result());
                 $ctr++;
@@ -595,7 +611,6 @@ class M_publications extends CI_Model {
             return $authors;
         }
     }
-
 
     public function search_autocomplete($item) {
         $sql = "SELECT id, title
@@ -621,9 +636,12 @@ class M_publications extends CI_Model {
         return $query->row();
     }
 
-	public function fetch_research_search($item) {
+    public function fetch_research_search($item,$status='') {
         $sql = "SELECT * FROM research ";
-        $sql .= "WHERE title LIKE '%" . mysql_real_escape_string(urldecode($item)). "%'";
+        $sql .= "WHERE title LIKE '%" . mysql_real_escape_string(urldecode($item)) . "%'";
+        
+        if($status)
+            $sql .= " AND status = '".(int)$status."'";
         
         $query = $this->db->query($sql);
         return $query->row();
@@ -677,7 +695,7 @@ class M_publications extends CI_Model {
     }
 
     public function fetch_table_data() { //------------------------
-        if(isset($_GET['page']))
+        if (isset($_GET['page']))
             $page = (int) $_GET['page'];
         else
             $page = 1;
@@ -702,7 +720,7 @@ class M_publications extends CI_Model {
 
             $total = $result->num_rows();
 
-            $rpp = 20;
+            $rpp = 5;
 
             $number_of_pages = ceil($total / $rpp);
 
@@ -725,21 +743,9 @@ class M_publications extends CI_Model {
                 else
                     $pt = 'Not defined';
 
-                if ($row->research_books == 1)
-                    $rb = 'Social Researches';
-                else if ($row->research_books == 2)
-                    $rb = 'Upland Farm Journal';
-                else
-                    $rb = 'Not defined';
+                $rb = $row->research_books;
 
-                if ($row->research_type == 1)
-                    $rt = 'Faculty';
-                else if ($row->research_type == 2)
-                    $rt = 'Student(s) w/ Faculty';
-                else if ($row->research_type == 3)
-                    $rt = 'Community';
-                else
-                    $rt = 'Not defined';
+                $rt = $row->research_type;
 
                 if ($row->presentation == 1)
                     $p = 'International Fora';
@@ -753,17 +759,21 @@ class M_publications extends CI_Model {
                 if ($row->status == 1)
                     $s = 'Completed';
                 else if ($row->status == 2)
-                    $s = 'Ongoing';
+                    $s = 'Published';
+                else if ($row->status == 3)
+                    $s = 'Conducted';
+                else if ($row->status == 4)
+                    $s = 'Presented';
                 else
                     $s = 'Not defined';
 
                 if ($row->date_completed == '0000-00-00' || $row->date_completed == '' || $row->date_completed == NULL)
                     $dp = '--';
-                else{
+                else {
                     $d = getdate(strtotime($row->date_completed));
                     $dp = $d['month'] . ' ' . $d['mday'] . ', ' . $d['year'];
                 }
-                
+
                 if ($row->year_published == '0000' || $row->year_published == '')
                     $yp = '--';
                 else
@@ -773,8 +783,9 @@ class M_publications extends CI_Model {
 
                 $response->rows[$i]['cell'] = array(
                     $start + 1,
-                    wordwrap($row->title, 55, '<br>', true) ,
-                    wordwrap($row->funding_agency, 35,'<br>',true),
+                    wordwrap($row->title, 70, '<br>', true),
+                    wordwrap($row->funding_agency, 35, '<br>', true),
+                    $row->researchers, $row->venue, $row->fora, $row->date_of_presentation,
                     $pt, $rb, $rt, $p, $s, $dp, $yp,
                 );
                 $i++;
@@ -785,7 +796,7 @@ class M_publications extends CI_Model {
     }
 
     public function fetch_print_preview_table_data() { //------------------------
-        if(isset($_GET['page']))
+        if (isset($_GET['page']))
             $page = (int) $_GET['page'];
         else
             $page = 1;
@@ -818,7 +829,7 @@ class M_publications extends CI_Model {
             $result = $this->db->query($sql);
 
             foreach ($result->result() as $row) {
-                
+
                 $auid_arr = $this->fetch_authors($row->id);
 //                $sql = "SELECT authors_id FROM publish WHERE research_id=" . $row->id;
 //                
@@ -832,19 +843,18 @@ class M_publications extends CI_Model {
 
                 if ($row->date_completed == '0000-00-00' || $row->date_completed == '' || $row->date_completed == NULL)
                     $dp = '--';
-                else{
+                else {
                     $d = getdate(strtotime($row->date_completed));
                     $dp = $d['month'] . ' ' . $d['mday'] . ', ' . $d['year'];
                 }
-                
+
                 $response->rows[$i]['id'] = $row->id;
 
                 $response->rows[$i]['cell'] = array(
                     $start + 1,
-                    
-                    wordwrap($row->title, 50, '<br>', true) ,
+                    wordwrap($row->title, 50, '<br>', true),
                     $auid_arr,
-                    wordwrap($row->funding_agency, 35,'<br>',true),
+                    wordwrap($row->funding_agency, 35, '<br>', true),
                     $dp
                 );
                 $i++;
@@ -853,9 +863,85 @@ class M_publications extends CI_Model {
             return $response;
         }
     }
+
+//--Advance Search
+
+    public function fetch_adv_research_data($rid) { //------------------------------
+        $response = array();
+
+        $sql = "SELECT * FROM research";
+
+        if ($rid != 0)
+            $sql .= " WHERE id=" . $rid;
+
+        $row = $this->db->query($sql)->row();
+
+        if ($row->publication_type == 1)
+            $response['pt'] = 'International';
+        else if ($row->publication_type == 2)
+            $response['pt'] = 'National';
+        else if ($row->publication_type == 3)
+            $response['pt'] = 'Local';
+        else
+            $response['pt'] = 'Not defined';
+
+        $response['rb'] = $row->research_books;
+
+        $response['rt'] = $row->research_type;
+
+        if ($row->presentation == 1)
+            $response['p'] = 'International Fora';
+        else if ($row->presentation == 2)
+            $response['p'] = 'National Fora';
+        else if ($row->presentation == 3)
+            $response['p'] = 'Local Fora';
+        else
+            $response['p'] = 'Not defined';
+
+        if ($row->status == 1)
+            $response['s'] = 'Completed';
+        else if ($row->status == 2)
+            $response['s'] = 'Published';
+        else if ($row->status == 3)
+            $response['s'] = 'Conducted';
+        else if ($row->status == 4)
+            $response['s'] = 'Presented';
+        else
+            $response['s'] = 'Not defined';
+
+        if ($row->date_completed == '0000-00-00' || $row->date_completed == '')
+            $response['dc'] = '--';
+        else
+            $response['dc'] = date("m/d/Y", strtotime($row->date_completed));
+
+        if ($row->year_published == '0000' || $row->year_published == '')
+            $response['yp'] = '--';
+        else
+            $response['yp'] = $row->year_published;
+
+        $response['res'] = $row->researchers;
+
+        $response['venue'] = $row->venue;
+        $response['fora'] = $row->fora;
+
+        if ($row->date_of_presentation == '0000-00-00' || $row->date_of_presentation == '')
+            $response['dpres'] = '--';
+        else
+            $response['dpres'] = date("m/d/Y", strtotime($row->date_of_presentation));
+
+        $response['title'] = $row->title;
+        $response['agency'] = $row->funding_agency;
+        $response['dloads'] = $row->downloads;
+        $response['views'] = $row->views;
+        $response['rid'] = $row->id;
+
+        echo json_encode($response);
+    }
+
 //******************************************************************************
 }
 
+//******************************************************************************
 //--END-OF-[MODEL]
 
 //

@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="col-sm-4 col-md-5 col-lg-5">
-            <h4 style="margin-left: -15px; border-bottom: 1px solid #000;">Personal Information:</h4>
+            <h4 style="margin-left: -15px; border-bottom: 1px solid #000;">Research Information:</h4>
             <div class="row">
                 <div class="form-group">
                     <label class="col-xs-4 col-sm-4 col-md-4 control-label">Title of Research:</label>
@@ -39,7 +39,7 @@
             ?>
             <div class="row">
                 <div class="form-group">
-                    <label class="col-xs-4 col-sm-4 col-md-4 control-label">Publication Type:</label>
+                    <label class="col-xs-4 col-sm-4 col-md-4 control-label">Level of Publication:</label>
                     <div class="col-xs-8 col-sm-8 col-md-8">
                         <input type="text" class="form-control" disabled value="<?php echo $type; ?>">
                     </div>
@@ -91,7 +91,7 @@
             ?>
             <div class="row">
                 <div class="form-group">
-                    <label class="col-xs-4 col-sm-4 col-md-4 control-label">Presentation:</label>
+                    <label class="col-xs-4 col-sm-4 col-md-4 control-label">Level of Presentation:</label>
                     <div class="col-xs-8 col-sm-8 col-md-8">
                         <input type="text" class="form-control" disabled value="<?php echo $type; ?>">
                     </div>

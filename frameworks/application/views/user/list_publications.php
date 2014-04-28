@@ -5,7 +5,7 @@
         <input type="radio" name="status" value="2" id="status3"/><label for="status3">On-going</label>
     </div>
     
-    <div id="filter-by-presentation"><p>Presentation:</p>
+    <div id="filter-by-presentation"><p>Level of Presentation:</p>
         <input type="radio" name="presentation" value="0" checked="checked" id="pres1"/><label for="pres1">All</label>
         <input type="radio" name="presentation" value="1" id="pres2"/><label for="pres2">International</label>
         <input type="radio" name="presentation" value="2" id="pres3"/><label for="pres3">National</label>

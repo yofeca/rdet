@@ -19,8 +19,9 @@ class User extends MY_Controller {
     }
 
     public function home() {
+
         $data = $this->header_footer(
-                'Home', 'user', array('myStyle'), array('u-h-js', 'u-s-b-js'));
+                'Home', 'user', array('myStyle'), array('u-h-js', 'u-s-b-js', 'user-publications'));
         $data['bar_title'] = 'HOME (List Of Pubications)';
         $data['content'] = $this->load->view('user/home', '', TRUE);
         $this->load->view('user/main', $data);
@@ -30,57 +31,90 @@ class User extends MY_Controller {
         $this->load->view('user/view_list_of_titles');
     }
 
-    public function preview_research( $option=3, $research_id= "0" ) {
-    	if($option != 3 && $research_id != "0"){
-        	if( $option == 1 ){
-        		$research_data['research'] = $this->m_publications->fetch_research_search($research_id);
+//    public function advance_search() {
+//        $skey = $this->input->get();
+//        $vars = array_keys($skey);
+//        //echo $vars['0'];
+//        echo $skey[$vars['0']];
+//        if ($skey['title']) {
+//            $research_data['research'] = $this->m_publications->fetch_research_search($skey['title'], $skey['status']);
+//
+//            if ($research_data['research']) {
+//                $research_data['author'] = $this->m_publications->fetch_authors($research_data['research']->id);
+//                $content = $this->load->view('user/preview_research', $research_data, TRUE);
+//            } else {
+//                $content = $data['content'] = $this->load->view('user/preview_research_empty', '', TRUE);
+//            }
+//        } else {
+//            $info['author'] = $this->m_author->fetch_author_advsearch($vars['0'],$skey[$vars['0']]);
+//
+//            if ($info['author']) {
+//                $info['research'] = $this->m_publications->fetch_author_published($info['author']->id);
+//                $content = $this->load->view('user/preview_author', $info, TRUE);
+//            } else {
+//                $content = $this->load->view('user/preview_author_empty', '', TRUE);
+//            }
+//        }
+//
+//        $data = $this->header_footer('Preview Research', /* title */ 'user', /* user type */ array('myStyle'), /* css styles */ array('u-v-r', 'advance-search')); /* jquery ui themes */
+//        $data['content'] = $content;
+//        $this->load->view('user/main', $data);
+//    }
 
-        		if($research_data['research']){
-            		$research_data['author'] = $this->m_publications->fetch_authors($research_data['research']->id);
+    public function preview_research($option = 3, $research_id = "0") {
+        if ($option != 3) {
+            if ($research_id == '0') {
+                $content = $data['content'] = $this->load->view('user/preview_research_empty', '', TRUE);
+            } else {
+                if ($option == 1) {
+                    $research_data['research'] = $this->m_publications->fetch_research_search($research_id);
+
+                    if ($research_data['research']) {
+                        $research_data['author'] = $this->m_publications->fetch_authors($research_data['research']->id);
+                        $content = $this->load->view('user/preview_research', $research_data, TRUE);
+                    } else {
+                        $content = $data['content'] = $this->load->view('user/preview_research_empty', '', TRUE);
+                    }
+                } else {
+                    $research_data['research'] = $this->m_publications->fetch_research($research_id);
+                    $research_data['author'] = $this->m_publications->fetch_authors($research_id);
                     $content = $this->load->view('user/preview_research', $research_data, TRUE);
-                }else{
-                    $content = $data['content'] = $this->load->view('user/preview_research_empty', '', TRUE);
                 }
-        	}else{
-            	$research_data['research'] = $this->m_publications->fetch_research($research_id);
-            	$research_data['author'] = $this->m_publications->fetch_authors($research_id);
-                $content = $this->load->view('user/preview_research', $research_data, TRUE);
-        	}
+            }
 
-        	$data = $this->header_footer(
-                    'Preview Research', /* title */ 'user', /* user type */ array('myStyle'), /* css styles */ array('u-v-r')); /* jquery ui themes */
-        	$data['content'] = $content;
+            $data = $this->header_footer(
+                    'Preview Research', /* title */ 'user', /* user type */ array('myStyle'), /* css styles */ array('u-v-r', 'user-publications')); /* jquery ui themes */
+            $data['content'] = $content;
             $this->load->view('user/main', $data);
-        }else{
-            $this->load->view('index');
+        } else {
+            $this->home();
         }
     }
 
-    public function preview_author($option=3, $author_id="0") {
-        if( $option !=3 && $author_id != "0" ){
+    public function preview_author($option, $item = '') {
+        if ($option && $item) {
 
-            if($option == 1){
-                $info['author'] = $this->m_author->fetch_author_search($author_id);
+            if ($option) {
+                $info['author'] = $this->m_author->fetch_author_search($option,$item);
 
-                if($info['author']){
+                if ($info['author']) {
                     $info['research'] = $this->m_publications->fetch_author_published($info['author']->id);
                     $content = $this->load->view('user/preview_author', $info, TRUE);
-                }else{
+                } else {
                     $content = $this->load->view('user/preview_author_empty', '', TRUE);
                 }
-
-            }else{
-                $info['author'] = $this->m_author->fetch_author((int)$author_id);
-                $info['research'] = $this->m_publications->fetch_author_published((int)$author_id);
+            } else {
+                $info['author'] = $this->m_author->fetch_author((int) $author_id);
+                $info['research'] = $this->m_publications->fetch_author_published((int) $author_id);
                 $content = $this->load->view('user/preview_author', $info, TRUE);
             }
 
             $data = $this->header_footer(
-                    'Author', 'user', array('myStyle'), array('u-s-b-js', 'js-a-p-author'));
+                    'Author', 'user', array('myStyle'), array('u-s-b-js', 'js-a-p-author', 'user-authors'));
             $data['content'] = $content;
             $this->load->view('user/main', $data);
-        }else{
-            $this->load->view('index');
+        } else {
+            $this->home();
         }
     }
 
@@ -95,32 +129,36 @@ class User extends MY_Controller {
         $info['research'] = $this->m_publications->fetch_author_published($author_id);
 
         $data = $this->header_footer(
-                'Author', /* title */ 'user', /* user type */ array('myStyle'), /* css styles */ array('u-s-b-js', 'js-a-p-author'));
+                'Author', /* title */ 'user', /* user type */ array('myStyle'), /* css styles */ array('u-s-b-js', 'js-a-p-author', 'advance-search'));
         $data['content'] = $this->load->view('user/list_publications', $info, TRUE);
         $this->load->view('user/main', $data);
     }
 
     public function about() {
+
         $data = $this->header_footer(
-                'Home', 'user', array('myStyle'), array('u-h-js', 'u-s-b-js'));
+                'Home', 'user', array('myStyle'), array('u-h-js', 'u-s-b-js', 'user-publications'));
         $data['bar_title'] = 'ABOUT US';
         $data['content'] = $this->load->view('user/about', '', TRUE);
         $this->load->view('user/main', $data);
     }
 
     public function publications() {
+
         $data = $this->header_footer(
                 'Publications', 'user', array('myStyle'), array('user-publications'));
         $data['content'] = $this->load->view('user/publications', '', TRUE);
         $this->load->view('user/main', $data);
     }
-    
+
     public function authors() {
+
         $data = $this->header_footer(
                 'Authors', 'user', array('myStyle'), array('user-authors'));
         $data['content'] = $this->load->view('user/authors', '', TRUE);
         $this->load->view('user/main', $data);
     }
+
 }
 
 ?>

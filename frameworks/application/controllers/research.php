@@ -12,7 +12,6 @@ class Research extends MY_Controller{
         $this->load->helper('url');
     }
     
-    
     public function index() {
         $this->preview();
     }
